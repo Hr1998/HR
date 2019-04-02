@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="lib\bootstrap\css\bootstrap.css">
+    <link rel="stylesheet" href="lib/Flat-UI-master/dist/css/flat-ui.css">
+    <link rel="stylesheet" href="lib/cartoon/style.css">
+    <link rel="stylesheet" href="lib/bootstrapvalidator-master/dist/css/bootstrapValidator.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/awsomeFont/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="lib/awsomeFont/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="lib/awsomeFont/css/set.css" />
+    <link rel="stylesheet" type="text/css" href="lib/awsomeFont/fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="lib/bootstrap-sweetalert-master/dist/sweetalert.css">
+    <style type="text/css">
+    #loginTitle{
+        position: relative;
+        top:-5px; 
+        color:black; 
+    }
+    .modal-content{
+        background-color:#EDEFF1; 
+        width:410px; 
+        height:356px; 
+        position:relative; 
+        left:100px; 
+        top:80px
+    }
+    .unUseInput{
+        BACKGROUND-COLOR: transparent;
+        border-left-width:0px;
+        border-right-width:0px;
+        border-top-width:0px;
+        border-bottom-color:rgb(177, 179, 180);
+        border-bottom-width: thin;
+        width: 326px;
+    }
+    .updateLink{
+        cursor: pointer;
+        position:absolute;
+        right: 30px;
+        top:0;
+        color: rgb(34,51,253)
+    }
+    </style> 
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class=" Login">
+        <div class="login-screen">
+            <div class="hold-transition login-form col-md-5 col-md-offset-2 col-lg-offset-3 col-xl-offset-4 ">
+
+
+                <h4 id="loginTitle" class="center" align="center">
+                    宿舍管理
+                </h4>
+                <!--<img src="D:\vs2017workspace\dorm\dorm\wwwroot\images\badge.png" style="width:25%;height:25%; position: relative;left:220px;right:10px; bottom:70px" />-->
+                <form>
+                    <div class="control-group form-group">
+
+                        <input id="login-name" type="text" class="form-control login-field" placeholder="学号" name="username" />
+                        <lable class="login-field-icon fui-man-16" for="login-name">
+
+                        </lable>
+                    </div>
+                    <div class="control-group form-group">
+                        <input id="login-pass" type="password" class="form-control login-field" placeholder="密码" name="password" />
+                        <lable class="login-field-icon fui-lock-16" for="login-pass">
+
+                        </lable>
+                    </div>
+                    <button class="btn btn-primary btn-lg btn-block" href="#" onclick="login()">登录</button>
+                </form>
+                <a class="login-link" href="#" onclick="resetPassword()">Lost your password</a>
+                <!-- 按钮触发模态框 -->
+                <!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>-->
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h5 class="modal-title" id="myModalLabel" style="font-size:35px; margin-left:26px; margin-top:26px">找回密码</h5>
+                                <h6 style="font-size:16px; margin-left:26px; color:#A7A7A7">验证码将会发送至您的注册邮箱</h6>
+                            </div>
+                            <div class="modal-body" style="padding:0 15px;">
+                                <p>
+                                    <span class="input input--nao">
+                                        <input class="input__field input__field--nao" type="email" id="input-1" style="padding:1.5em 0em 0.25em;" />
+                                        <label class="input__label input__label--nao" for="input-1">
+                                            <span class="input__label-content input__label-content--nao" style="padding:2em 1em;color:#A5A5A5;">请输入邮箱</span>
+                                        </label>
+                                        <svg class="graphic graphic--nao" style="padding:0 0.75em" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                                            <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0" />
+                                        </svg>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="modal-footer" style=" margin-right:20px; ">
+                                <button type="button" class="btn btn-primary" style=" width:328px; height:44px; margin-top:-20px" onclick="validateEmail()">下一步</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="mySecondModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color:#EDEFF1; width:410px; height:356px; position:relative; left:100px; top:80px">
+                <div class="modal-header" style="border-bottom:#e5e5e5">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title" id="myModalLabel" style="font-size:35px; margin-left:26px; margin-top:26px">找回密码</h5>
+                    <h6 style="font-size:16px; margin-left:26px; color:#A7A7A7">验证码将会发送至您的注册邮箱</h6>
+                </div>
+                <div class="modal-body" style="padding:0 15px;">
+                    <p style="margin-bottom: 0;margin-left: 35px">
+                        <input type="email" class="unUseInput" disabled/>
+                        <a class="updateLink" onclick="backToSetEmail()">修改</a>
+                    <p>
+                        <span class="input input--nao" style="margin-top: 0px;">
+                            <input class="input__field input__field--nao" type="email" id="input-1" style="margin-top: 0;" />
+                            <label class="input__label input__label--nao" for="input-1">
+                                <span class="input__label-content input__label-content--nao" style="padding: 12px 0 0 15px;color:#A5A5A5;">请输入六位邮箱验证码</span>
+                            </label>
+                            <svg class="graphic graphic--nao" style="padding:0 0.75em" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                                <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0" />
+                            </svg>
+                        </span>
+                    </p>
+                </div>
+                <div class="modal-footer" style=" margin-right:20px; ">
+                    <button type="button" class="btn btn-primary" style=" width:328px; height:44px; margin-top:-20px">下一步</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    </div>
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/cartoon/delaunator.min.js"></script>
+    <script src="lib/cartoon/index.js"></script>
+    <script src="lib/bootstrapvalidator-master/dist/js/bootstrapValidator.min.js"></script>
+    <script src="js/Login.js"></script>
+    <script type="text/javascript" src="lib/awsomeFont/js/classie.js"></script>
+    <script src="js/util.js"></script>
+    <script src="lib/bootstrap-sweetalert-master/dist/sweetalert.js"></script>
+</body>
+</html>
