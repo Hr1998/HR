@@ -126,7 +126,7 @@ function login(){
                 UTIL.setCookie('userId',result.data.userId);
                 UTIL.setCookie('status',result.data.status);
                 console.log(result.data.userName);
-                top.window.location.href = 'file:///D:/vs2017workspace/Dashio/dormIndex.html'
+                top.window.location.href = 'file:///D:/vs2017workspace/dorm2.0/dormIndex.html'
                     
             }
         },
